@@ -7,11 +7,13 @@ console.log(tableName)
 console.log(columns)
 
 const database = {
-    "tables": {}
+    "tables": {
+        [tableName]: {
+            columns: {}
+        },
+        data: []
+    }
 }
-
-Object.assign(database.tables, {[tableName]: {columns: {}}})
-Object.assign(database.tables[tableName], {data: []})
 
 for (const column of columns) {
     const splitArray = column.split(" ")
@@ -20,5 +22,4 @@ for (const column of columns) {
     Object.assign(database.tables[tableName].columns, {[name]: value})
 }
 
-
-console.log(JSON.stringify(database, null, "\t"))
+console.log(JSON.stringify(database, null, " "))
