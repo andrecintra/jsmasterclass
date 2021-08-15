@@ -6,19 +6,19 @@ const columns = command.match(/\((.+)\)/)[1].trim().split(', ')
 console.log(tableName)
 console.log(columns)
 
-const tables = {
+const database = {
     "tables": {}
 }
 
-Object.assign(tables.tables, {[tableName]: {columns: {}}})
-Object.assign(tables.tables[tableName], {data: []})
+Object.assign(database.tables, {[tableName]: {columns: {}}})
+Object.assign(database.tables[tableName], {data: []})
 
 for (const column of columns) {
     const splitArray = column.split(" ")
     const name = splitArray[0]
     const value = splitArray[1]
-    Object.assign(tables.tables[tableName].columns, {[name]: value})
+    Object.assign(database.tables[tableName].columns, {[name]: value})
 }
 
 
-console.log(JSON.stringify(tables, null, "\t"))
+console.log(JSON.stringify(database, null, "\t"))
