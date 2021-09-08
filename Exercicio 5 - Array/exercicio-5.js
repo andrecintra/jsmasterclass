@@ -6,9 +6,9 @@ const createTable = function(command) {
 
     this.tables = {
         [tableName]: {
-            columns: {}
+            columns: {},
+            data: []
         },
-        data: []
     }
 
     for (const column of columns) {
@@ -42,15 +42,12 @@ const insert = function(command) {
     const columns = command.match(/\((.+?)\)/)[1].trim().split(', ')
     const values = command.match(/\(.+?\).*?(\(.+?\))/)[1].trim().substring(1).slice(0, -1).split(', ')
 
-    let row;
+    let row = {}
     for (let i = 0; i < columns.length; i++) {
-        row = {
-            ...row,
-            [columns[i]]: values[i]
-        }
+        row[columns[i]] = values[i]
     }
 
-    this.tables.data.push(row)
+    this.tables[tableName].data.push(row)
 }
 
 const database = {
